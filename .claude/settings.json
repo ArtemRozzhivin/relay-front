@@ -1,0 +1,40 @@
+{
+	"$schema": "https://json.schemastore.org/claude-code-settings.json",
+	"permissions": {
+		"allow": [
+			"Edit(docs/**)",
+			"Write(docs/**)",
+			"Bash(npx plop:*)",
+			"Bash(npm run g:*)",
+			"Bash(npm run plop:*)",
+			"Bash(npm run lint:*)",
+			"Bash(npm run type-check:*)",
+			"Bash(npm run test:*)",
+			"Bash(npm run format:*)",
+			"Bash(git status:*)",
+			"Bash(git diff:*)",
+			"Bash(git log:*)",
+			"Bash(git add:*)"
+		],
+		"deny": [
+			"Read(./.env)",
+			"Read(./.env.local)",
+			"Read(./.env.*.local)",
+			"Read(./certificates/**)"
+		]
+	},
+	"hooks": {
+		"PostToolUse": [
+			{
+				"matcher": "Write|Edit",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "node -e \"let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{try{const cp=require('child_process');const f=(JSON.parse(s).tool_input||{}).file_path;const e=(f||'').split('.').pop().toLowerCase();if(f&&['ts','tsx','js','jsx','json','css','scss','md','yml','yaml'].indexOf(e)>=0)cp.execSync('npx prettier --write '+JSON.stringify(f),{stdio:'ignore'})}catch(x){}})\" 2>/dev/null || true",
+						"statusMessage": "Formatting with Prettier…"
+					}
+				]
+			}
+		]
+	}
+}

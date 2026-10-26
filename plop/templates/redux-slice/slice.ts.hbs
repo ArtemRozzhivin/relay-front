@@ -1,0 +1,31 @@
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+
+interface {{pascalCase name}}State {
+	value: number;
+}
+
+const initialState: {{pascalCase name}}State = {
+	value: 0,
+};
+
+export const {{camelCase name}}Slice = createSlice({
+	name: '{{camelCase name}}',
+	initialState,
+	reducers: {
+		set: (state, action: PayloadAction<number>) => {
+			state.value = action.payload;
+		},
+	},
+});
+
+export const { set } = {{camelCase name}}Slice.actions;
+export const {{camelCase name}}Reducer = {{camelCase name}}Slice.reducer;
+
+/**
+ * Selector typed by the slice's own state shape — avoids importing `RootState`
+ * from the app layer (which would be an upward import). The key must match the
+ * one registered in `src/app/store/root-reducer.ts` (`{{camelCase name}}`).
+ */
+export const select{{pascalCase name}}Value = (state: {
+	{{camelCase name}}: {{pascalCase name}}State;
+}): number => state.{{camelCase name}}.value;

@@ -1,0 +1,57 @@
+'use client';
+
+import { type Control, type FieldErrors, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { getApiErrorMessage } from '@/shared/api';
+import { toast } from '@/shared/ui';
+
+import {
+	{{camelCase name}}DefaultValues,
+	{{camelCase name}}Schema,
+	type {{pascalCase name}}Values,
+} from './{{kebabCase name}}.schema';
+
+interface Use{{pascalCase name}}FormResult {
+	control: Control<{{pascalCase name}}Values>;
+	errors: FieldErrors<{{pascalCase name}}Values>;
+	onSubmit: () => void;
+	isLoading: boolean;
+}
+
+/**
+ * Two-layer form hook: owns the form (react-hook-form + zod) AND the side
+ * effects (entity mutation + toasts). Swap the placeholder mutation for a real
+ * one from your entity's `api` segment.
+ */
+export function use{{pascalCase name}}Form(): Use{{pascalCase name}}FormResult {
+	const {
+		control,
+		handleSubmit,
+		reset,
+		formState: { errors },
+	} = useForm<{{pascalCase name}}Values>({
+		resolver: zodResolver({{camelCase name}}Schema),
+		defaultValues: {{camelCase name}}DefaultValues,
+		mode: 'onTouched',
+	});
+
+	// const [submit, { isLoading }] = useCreate{{pascalCase name}}Mutation();
+	const isLoading = false;
+
+	const onSubmit = handleSubmit(async (values) => {
+		try {
+			// await submit(values).unwrap();
+			void values;
+			toast.success('Saved');
+			reset();
+		} catch (error) {
+			const message = getApiErrorMessage(error);
+			if (message) {
+				toast.error(message);
+			}
+		}
+	});
+
+	return { control, errors, onSubmit, isLoading };
+}

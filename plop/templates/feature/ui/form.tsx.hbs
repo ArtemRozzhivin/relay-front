@@ -1,0 +1,21 @@
+'use client';
+
+import type { JSX } from 'react';
+
+import { Button } from '@/shared/ui';
+
+import { use{{pascalCase name}}Form } from '../model';
+
+export function {{pascalCase name}}Form(): JSX.Element {
+	const { onSubmit, isLoading } = use{{pascalCase name}}Form();
+
+	return (
+		<form onSubmit={onSubmit} className="flex flex-col gap-4">
+			{/* Wire fields to `control` from use{{pascalCase name}}Form() using
+			    react-hook-form's <Controller> + shared Input components. */}
+			<Button type="submit" disabled={isLoading}>
+				Submit
+			</Button>
+		</form>
+	);
+}

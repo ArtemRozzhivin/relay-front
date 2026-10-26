@@ -1,0 +1,18 @@
+#!/bin/sh
+
+echo "▶️ Running pre-commit checks on staged files..."
+
+npx lint-staged
+if [ $? -ne 0 ]; then
+  echo "❌ Prettier/ESLint checks failed."
+  exit 1
+fi
+
+echo "🔷 Checking TypeScript..."
+npm run type-check
+if [ $? -ne 0 ]; then
+  echo "❌ TypeScript check failed."
+  exit 1
+fi
+
+echo "✅ Pre-commit checks passed!"

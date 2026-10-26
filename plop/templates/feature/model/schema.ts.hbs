@@ -1,0 +1,9 @@
+import { z } from 'zod';
+
+export const {{camelCase name}}Schema = z.object({
+	// Add fields, e.g. email: z.string().email('Invalid email'),
+});
+
+export type {{pascalCase name}}Values = z.infer<typeof {{camelCase name}}Schema>;
+
+export const {{camelCase name}}DefaultValues: {{pascalCase name}}Values = {};

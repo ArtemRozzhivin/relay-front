@@ -1,0 +1,25 @@
+services:
+  app-dev:
+    build:
+      context: .
+      target: dev
+    container_name: frontend-dev
+    ports:
+      - 3000:3000
+    restart: always
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env
+
+  app-prod:
+    build:
+      context: .
+      target: prod
+    container_name: frontend-prod
+    ports:
+      - 3000:3000
+    restart: always
+    env_file:
+      - .env

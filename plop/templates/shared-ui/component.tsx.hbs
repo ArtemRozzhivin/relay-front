@@ -1,0 +1,11 @@
+import type { JSX } from 'react';
+
+import { cn } from '@/shared/lib';
+
+interface {{pascalCase name}}Props {
+	className?: string;
+}
+
+export function {{pascalCase name}}({ className }: {{pascalCase name}}Props): JSX.Element {
+	return <div className={cn(className)} />;
+}

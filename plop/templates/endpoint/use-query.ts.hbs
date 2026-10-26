@@ -1,0 +1,11 @@
+'use client';
+
+import { use{{pascalCase name}}Query } from '../api/{{kebabCase entity}}';
+
+/**
+ * Consumer hook for the `{{camelCase name}}` query. Shape the result / surface
+ * errors here so components stay declarative.
+ */
+export function use{{pascalCase name}}() {
+	return use{{pascalCase name}}Query();
+}

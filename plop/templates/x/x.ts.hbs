@@ -1,0 +1,8 @@
+// Cross-import API: what the `{{kebabCase consumer}}` entity may use from
+// `{{kebabCase producer}}`. Re-export ONLY the minimum (types, selectors, thin UI):
+//
+//   export type { {{pascalCase producer}} } from '../model';
+//
+// Consume it from `{{kebabCase consumer}}` via:
+//   import { … } from '@/entities/{{kebabCase producer}}/@x/{{kebabCase consumer}}';
+export {};

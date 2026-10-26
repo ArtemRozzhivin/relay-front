@@ -1,0 +1,22 @@
+'use client';
+
+import { use{{pascalCase name}}Mutation } from '../api/{{kebabCase entity}}';
+
+/**
+ * Consumer hook for the `{{camelCase name}}` mutation. Recommended: wrap the
+ * trigger to own toasts + error handling (the two-layer pattern), e.g.
+ *
+ *   const [trigger, { isLoading }] = use{{pascalCase name}}Mutation();
+ *   const submit = useCallback(async (args) => {
+ *     try {
+ *       await trigger(args).unwrap();
+ *       toast.success('Saved');                    // from '@/shared/ui'
+ *     } catch (error) {
+ *       const message = getApiErrorMessage(error);  // from '@/shared/api'
+ *       if (message) toast.error(message);
+ *     }
+ *   }, [trigger]);
+ */
+export function use{{pascalCase name}}() {
+	return use{{pascalCase name}}Mutation();
+}

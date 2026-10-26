@@ -1,0 +1,12 @@
+import { describe, expect, it } from 'vitest';
+
+import { renderWithProviders } from '@/__tests__/test-utils';
+
+import { {{export}} } from './{{basename path}}';
+
+describe('{{export}}', () => {
+	it('renders without crashing', () => {
+		const { container } = renderWithProviders(<{{export}} />);
+		expect(container).toBeTruthy();
+	});
+});
